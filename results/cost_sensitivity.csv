@@ -1,0 +1,5 @@
+scenario,min-var cost $k/yr (test),"saving vs threshold, train %","saving vs threshold, test %",points compared (test)
+base,1344.0,37.6,45.1,7
+mostly linear,1209.3,19.7,30.1,7
+nearly pure linear,1195.8,16.9,27.8,7
+mostly convex,987.3,76.8,80.3,7

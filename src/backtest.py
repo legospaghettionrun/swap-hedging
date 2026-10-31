@@ -81,3 +81,10 @@ def run(policy, dy, book, cov_path, warmup=WARMUP):
         rows.append((-(r @ X[i]), cost, float((np.abs(q) * DV).sum())))
     return pd.DataFrame(rows, index=dy.index[warmup:],
                         columns=["gross", "cost", "traded"])
+
+
+def set_costs(spread, impact):
+    """Change the cost model at run time (used by the sensitivity analysis)."""
+    global SPREAD, IMPACT, C
+    SPREAD, IMPACT = spread, impact
+    C = np.diag(IMPACT * DV ** 2)
