@@ -1,0 +1,13 @@
+,risk $k/day,var reduction %,cost $k/yr,traded $M/yr
+no hedge,910.8,0.0,0.0,0.0
+min-var daily,46.7,99.7,1344.0,2.4
+threshold 10k,49.3,99.7,973.7,1.6
+threshold 25k,52.8,99.7,745.4,1.2
+threshold 50k,59.8,99.6,545.4,0.8
+threshold 100k,79.4,99.2,375.5,0.5
+threshold 200k,112.3,98.5,194.0,0.2
+cost-aware 1e+05,47.0,99.7,959.8,1.8
+cost-aware 1e+06,48.2,99.7,626.1,1.2
+cost-aware 1e+07,55.5,99.6,328.0,0.6
+cost-aware 1e+08,90.0,99.0,108.2,0.2
+cost-aware 1e+09,153.0,97.2,23.1,0.0

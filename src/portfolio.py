@@ -14,14 +14,17 @@ H = np.array([
 BOOK_MEAN = np.array([20e3, 40e3, 60e3, 30e3])   # $/bp, illustrative
 
 
-def simulate_book(index, seed=42, phi=0.98, shock=1.5e3):
-    """DV01 held at the close of each day (mean-reverting around BOOK_MEAN)."""
+def simulate_book(index, seed=42, phi=0.98, shock=0.07):
+    """DV01 held at the close of each day.
+
+    log(DV01 / mean) follows a mean-reverting AR(1), so DV01 stays positive.
+    Stationary std of the log is about shock / sqrt(1 - phi^2) = 0.35.
+    """
     rng = np.random.default_rng(seed)
-    d = np.zeros((len(index), 4))
-    d[0] = BOOK_MEAN
+    x = np.zeros((len(index), 4))
     for t in range(1, len(index)):
-        d[t] = BOOK_MEAN + phi * (d[t - 1] - BOOK_MEAN) + rng.normal(scale=shock, size=4)
-    return pd.DataFrame(d, index=index, columns=BUCKETS)
+        x[t] = phi * x[t - 1] + rng.normal(scale=shock, size=4)
+    return pd.DataFrame(BOOK_MEAN * np.exp(x), index=index, columns=BUCKETS)
 
 
 def unhedged_pnl(book, dy):
